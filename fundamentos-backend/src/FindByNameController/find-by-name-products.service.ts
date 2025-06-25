@@ -1,9 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Prisma } from "generated/prisma";
-import { Interface } from "readline";
-import { ModelRepository } from "../model.repository";
 import { ProductsRepository } from "src/products.repository";
-
 
 export interface Product {
     name: string;

@@ -1,7 +1,7 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { ProfileRepository } from "src/profile.repository";
 
-export interface DeleteByIdProfileService {
+export interface DeleteByIdProfileRequest {
     id: string;
 }
 
@@ -13,7 +13,7 @@ export interface DeleteByIdProfileServiceResponse {
 export class DeleteByIdProfileService {
     constructor(private profileRepository: ProfileRepository) {}
 
-    async execute({ id }: DeleteByIdProfileService): Promise<DeleteByIdProfileServiceResponse> {
+    async execute({ id }: DeleteByIdProfileRequest): Promise<DeleteByIdProfileServiceResponse> {
 
         const existingProfile = await this.profileRepository.findById(id);
         if (!existingProfile) {
