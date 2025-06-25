@@ -4,25 +4,28 @@ import { z } from "zod";
 import { CreateProfileService } from "./create-profile.service";
 
 const createProfileBodySchema = z.object({
-    avatarUrl: z.string(),
-})
+  avatarUrl: z.string(),
+  userID: z.string(),
+});
 
 const bodyValidationPipe = new ZodValidationPipe(createProfileBodySchema);
+
 type CreateProfileBody = z.infer<typeof createProfileBodySchema>;
 
-@Controller('/profile')
+@Controller("/profile")
 export class CreateProfileController {
-    constructor(private createProfileService: CreateProfileService) {}
+  constructor(private createProfileService: CreateProfileService) {}
 
-    @Post()
-    @HttpCode(201)
-    async handle(@Body(bodyValidationPipe) body: CreateProfileBody) {
-        const { avatarUrl } = body;
+  @Post()
+  @HttpCode(201)
+  async handle(@Body(bodyValidationPipe) body: CreateProfileBody) {
+    const { avatarUrl, userID } = body;
 
-        const profile = await this.createProfileService.execute({
-            avatarUrl,
-        });
+    const profile = await this.createProfileService.execute({
+      avatarUrl,
+      userID,
+    });
 
-        return profile;
-    }
+    return profile;
+  }
 }
