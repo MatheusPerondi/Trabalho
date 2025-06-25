@@ -51,6 +51,9 @@ import { OrderItemsController } from './deleteController/deleteById-orderItem.co
 import { DeleteOrderItemService } from './deleteController/deleteById-orderItem.service';
 import { FindAllOrderItemsService } from './findAllController/find-all-orderItem.service';
 import { UpdateOrderItemService } from './putController/put-orderItem.service';
+import { UserRepository } from './user.repository';
+import { OrderRepository } from './orderRepository';
+import { OrderItemsRepository } from './orderItem.repository';
 
 
 
@@ -58,6 +61,6 @@ import { UpdateOrderItemService } from './putController/put-orderItem.service';
 @Module({
   imports: [],
   controllers: [CreateProductController, CreateModelController, FindManyByNameProdutcController, FindAllModelsController, UpdateModelController, DeleteModelController, FindAllProductsController, FindManyByNameController, UpdateProductController, DeleteProductController, CreateUserController, DeleteByIdUserController, FindAllUserController, UpdateUserController, CreateProfileController, DeleteByIdProfileController, FindAllProfileController, UpdateProfileController, CreateOrderController, OrderController, OrderController, CreateOrderItemsController, OrderItemsController, OrderItemsController],
-  providers: [PrismaService, CreateProductService, ProductsRepository, CreateModelService, ModelRepository, FindManyByName, FindAllModelsService, UpdateModelService, DeleteModelService, FindAllProductsService, FindManyByNameProduct, UpdateProductService, DeleteProductService, CreateUserService, DeleteByIdUserService, FindAllUsersService, UpdateUserService, CreateProfileService, DeleteByIdProfileService, FindAllProfileService, PutProfileService, CreateOrderService, DeleteOrderService, FindAllOrdersService, UpdateOrderService, CreateOrderItemsService, DeleteOrderItemService, FindAllOrderItemsService, UpdateOrderItemService],
+  providers: [PrismaService, CreateProductService, OrderItemsRepository, OrderRepository, ProductsRepository, CreateModelService, ModelRepository, FindManyByName, FindAllModelsService, UpdateModelService, DeleteModelService, FindAllProductsService, FindManyByNameProduct, UpdateProductService, UserRepository, OrderRepository , DeleteProductService, CreateUserService, DeleteByIdUserService, FindAllUsersService, UpdateUserService, CreateProfileService, DeleteByIdProfileService, FindAllProfileService, PutProfileService, CreateOrderService, DeleteOrderService, FindAllOrdersService, UpdateOrderService, CreateOrderItemsService, DeleteOrderItemService, FindAllOrderItemsService, UpdateOrderItemService],
 })
 export class AppModule {}
