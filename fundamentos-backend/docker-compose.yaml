@@ -25,4 +25,4 @@ services:
       - postgres
     environment:
       DATABASE_URL: postgresql://postgres:docker@postgres:5432/nestdb
-    command: npm run start:dev
+

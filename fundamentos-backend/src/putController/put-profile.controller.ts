@@ -1,6 +1,7 @@
-import { Body, Controller, HttpCode, Put } from "@nestjs/common";
+import { Body, Controller, HttpCode, Put, Param } from "@nestjs/common";
 import { ZodValidationPipe } from "src/pipes/zod-validation-pipe";
 import { z } from "zod";
+import { PutProfileService } from "./put-profile.service";
 
 const updateProfileBodySchema = z.object({
     avatarUrl: z.string(),
@@ -11,14 +12,18 @@ type UpdateProfileBody = z.infer<typeof updateProfileBodySchema>;
 
 @Controller('/profile')
 export class UpdateProfileController {
-    constructor(private updateProfileService: any) {} 
+    constructor(private updateProfileService: PutProfileService) {} 
 
-    @Put()
+    @Put(':id')  
     @HttpCode(200)
-    async handle(@Body(bodyValidationPipe) body: UpdateProfileBody) {
+    async handle(
+        @Param('id') id: string,
+        @Body(bodyValidationPipe) body: UpdateProfileBody
+    ) {
         const { avatarUrl } = body;
 
         const profile = await this.updateProfileService.execute({
+            id,
             avatarUrl,
         });
 

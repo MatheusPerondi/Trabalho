@@ -1,36 +1,30 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
+import { ProfileRepository } from "src/profile.repository";
 
 export interface Profile {
-    id: string;
+  id: string;
 }
 
 interface PutProfileServiceRequest {
-    avatarUrl: string;
+  id: string;
+  avatarUrl: string;
 }
 
 type PutProfileServiceResponse = {
-    profile: Profile;
+  profile: Profile;
 };
 
 @Injectable()
 export class PutProfileService {
-    constructor(
-        @Inject('ProfileRepository') private profileRepository: any // Replace 'any' with the actual type of your ProfileRepository
-    ) {}
+  constructor(private profileRepository: ProfileRepository) {}
 
-    async execute({
-        avatarUrl,
-    }: PutProfileServiceRequest): Promise<PutProfileServiceResponse> {
-        const profile = {
-            avatarUrl,
-        };
+  async execute({ id, avatarUrl }: PutProfileServiceRequest): Promise<PutProfileServiceResponse> {
+    const updatedProfile = await this.profileRepository.update(id, avatarUrl);
 
-        const updatedProfile = await this.profileRepository.update(profile);
-
-        return {
-            profile: {
-                id: updatedProfile.id?.toString() || "",
-            },
-        };
-    }
+    return {
+      profile: {
+        id: updatedProfile.id?.toString() || "",
+      },
+    };
+  }
 }

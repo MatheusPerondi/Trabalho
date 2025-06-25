@@ -1,4 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
+import { ProfileRepository } from "src/profile.repository";
 
 export interface Profile {
     id: string;
@@ -10,7 +11,7 @@ type FindAllProfileServiceResponse = {
 
 @Injectable()
 export class FindAllProfileService {
-    constructor(@Inject('ProfileRepository') private profileRepository: any) {}
+    constructor(private profileRepository: ProfileRepository) {}
 
     async execute(): Promise<FindAllProfileServiceResponse> {
         const profiles = await this.profileRepository.findAll();

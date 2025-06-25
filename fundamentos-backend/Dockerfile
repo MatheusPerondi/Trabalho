@@ -20,5 +20,6 @@ RUN npx prisma generate
 # Porta exposta
 EXPOSE 3000
 
-# Comando padrão (sobrescrito no docker-compose)
-CMD ["npm", "run", "start:dev"]
+# Comando padrão
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:dev"]
+
