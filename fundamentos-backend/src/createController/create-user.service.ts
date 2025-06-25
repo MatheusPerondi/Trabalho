@@ -1,4 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
+import { UserRepository } from "src/user.repository";
 
 export interface User{
     id: string;
@@ -15,9 +16,7 @@ type CreateUserServiceResponse = {
 
 @Injectable()
 export class CreateUserService {
-    constructor(
-        @Inject('UserRepository') private userRepository: any // Replace 'any' with the actual type of your UserRepository
-    ) {}
+    constructor(private userRepository: UserRepository) {}
 
     async execute({
         email,
