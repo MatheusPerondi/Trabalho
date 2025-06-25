@@ -3,25 +3,23 @@ import { z } from "zod";
 import { ZodValidationPipe } from "../pipes/zod-validation-pipe";
 import { UpdateOrderItemService } from "./put-orderItem.service";
 
-
-const updateOrderItemBodySchema = z.object({
+const schema = z.object({
   total: z.number().min(0).optional(),
 });
 
-const bodyValidationPipe = new ZodValidationPipe(updateOrderItemBodySchema);
-type UpdateOrderItemBody = z.infer<typeof updateOrderItemBodySchema>;
+type BodyDTO = z.infer<typeof schema>;
 
 @Controller("order-items")
 export class OrderItemsController {
-  constructor(private updateOrderItemService: UpdateOrderItemService) {}
+  constructor(private readonly updateOrderItemService: UpdateOrderItemService) {}
 
   @Put(":orderID/:productID")
   @HttpCode(HttpStatus.OK)
   async update(
     @Param("orderID") orderID: string,
     @Param("productID") productID: string,
-    @Body(bodyValidationPipe) body: UpdateOrderItemBody
-  ): Promise<{ orderItem: any }> {
+    @Body(new ZodValidationPipe(schema)) body: BodyDTO
+  ) {
     const orderItem = await this.updateOrderItemService.execute(orderID, productID, body);
     return { orderItem };
   }
