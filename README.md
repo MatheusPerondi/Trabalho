@@ -1,0 +1,1 @@
+Fiz boa parte aquela hora que o ava tava fora professor, da uma força ai se não estiver tudo no padrão kkkkkkk, tentei dar uma verificada rapida pra ver se ta tudo no padrão e acredito que a maioria das coisas esteja proximo
