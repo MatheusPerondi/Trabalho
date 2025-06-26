@@ -4,7 +4,7 @@ import { Order, Prisma } from "@prisma/client";
 
 @Injectable()
 export class OrderRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(order: Prisma.OrderUncheckedCreateInput): Promise<Order> {
     return await this.prisma.order.create({
@@ -12,8 +12,12 @@ export class OrderRepository {
     });
   }
 
-  async findAll(): Promise<Order[]> {
-    return await this.prisma.order.findMany();
+  async findAll() {
+    return this.prisma.order.findMany({
+      include: {
+        orderItems: true, // aqui inclui os itens relacionados
+      },
+    });
   }
 
   async findById(id: string): Promise<Order | null> {
